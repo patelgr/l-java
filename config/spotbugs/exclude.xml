@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SpotBugs exclusion filter for l-java.
+
+  Add entries here only when SpotBugs produces a confirmed false positive
+  that cannot be suppressed inline with @SuppressFBWarnings on the specific
+  element. Prefer inline suppression with a justifying comment over blanket
+  pattern exclusions here.
+
+  Example entry (do not add without a confirmed false positive):
+  <Match>
+    <Bug pattern="EXAMPLE_PATTERN"/>
+  </Match>
+-->
+<FindBugsFilter>
+</FindBugsFilter>

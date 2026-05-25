@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<module name="Checker">
+    <property name="severity" value="error"/>
+
+    <module name="SuppressionFilter">
+        <property name="file" value="${config_loc}/suppressions.xml"/>
+        <property name="optional" value="false"/>
+    </module>
+
+    <module name="SuppressWarningsFilter"/>
+
+    <module name="FileLength">
+        <property name="max" value="500"/>
+    </module>
+
+    <module name="LineLength">
+        <property name="max" value="140"/>
+        <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+    </module>
+
+    <!--
+        Detect decapitated exceptions — catch block throws new exception without passing the cause.
+        A caught exception should always be passed as the cause argument.
+    -->
+    <module name="RegexpMultiline">
+        <property name="id" value="decapitatedExceptionCause"/>
+        <property name="fileExtensions" value="java"/>
+        <property name="format" value="catch\s*\(\s*[\w.]+\s+\w+\s*\)\s*\{[\s\S]{0,500}?throw\s+new\s+[\w.]+\s*\(\s*&quot;[^&quot;]*&quot;\s*\)"/>
+        <property name="message" value="Possible decapitated exception: pass the caught exception as the cause."/>
+    </module>
+
+    <module name="TreeWalker">
+        <module name="SuppressWarningsHolder"/>
+        <module name="SuppressionCommentFilter">
+            <property name="offCommentFormat" value="CHECKSTYLE:OFF: ([\w|]+)"/>
+            <property name="onCommentFormat" value="CHECKSTYLE:ON: ([\w|]+)"/>
+            <property name="checkFormat" value="$1"/>
+        </module>
+
+        <!-- Imports -->
+        <module name="UnusedImports"/>
+        <module name="RedundantImport"/>
+        <module name="IllegalImport">
+            <property name="illegalPkgs"
+                      value="org.junit.rules, org.junit.runners, org.junit.experimental, junit.framework, java.util.logging"/>
+            <property name="illegalClasses"
+                      value="org.junit.Test, org.junit.Before, org.junit.After, org.junit.Assert, org.junit.Ignore"/>
+            <message key="import.illegal"
+                     value="Illegal import detected. Use JUnit 5 and SLF4J instead."/>
+        </module>
+
+        <!-- Forbidden patterns -->
+        <module name="RegexpSinglelineJava">
+            <property name="id" value="forbiddenPrint"/>
+            <property name="format" value="System\.(out|err)\.print"/>
+            <property name="message" value="Don't use System.out/err — use a logger instead."/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="id" value="forbiddenPrintStackTrace"/>
+            <property name="format" value="\.printStackTrace\(\)"/>
+            <property name="message" value="Don't use printStackTrace — use log.error(..., e) instead."/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="id" value="forbiddenSystemExit"/>
+            <property name="format" value="System\.exit\("/>
+            <property name="message" value="Don't use System.exit — throw an exception instead."/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="id" value="forbiddenSystemGc"/>
+            <property name="format" value="System\.gc\("/>
+            <property name="message" value="Don''t call System.gc() — GC timing is the JVM''s responsibility."/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+
+        <!-- Basic checks -->
+        <module name="ModifierOrder"/>
+        <module name="UpperEll"/>
+        <module name="EqualsAvoidNull"/>
+        <module name="NeedBraces"/>
+        <module name="LeftCurly"/>
+        <module name="RightCurly"/>
+        <module name="RequireThis"/>
+        <module name="EmptyBlock"/>
+        <module name="EmptyCatchBlock"/>
+        <module name="MissingSwitchDefault"/>
+
+        <!-- Naming -->
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+        </module>
+        <module name="TypeName"/>
+        <module name="ClassTypeParameterName"/>
+        <module name="MethodTypeParameterName"/>
+        <module name="LambdaParameterName"/>
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-zA-Z0-9_]*$"/>
+        </module>
+        <module name="ParameterName"/>
+        <module name="LocalVariableName"/>
+        <module name="StaticVariableName"/>
+        <module name="MemberName"/>
+        <module name="ConstantName">
+            <property name="format" value="^log(ger)?$|^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
+        </module>
+        <module name="CatchParameterName"/>
+        <module name="RecordComponentName"/>
+        <module name="RecordTypeParameterName"/>
+        <module name="PatternVariableName"/>
+        <module name="UnusedLocalVariable"/>
+
+        <!-- Bug Prevention -->
+        <module name="DefaultComesLast"/>
+        <module name="CovariantEquals"/>
+        <module name="EmptyStatement"/>
+        <module name="IllegalCatch">
+            <property name="illegalClassNames" value="java.lang.Throwable, java.lang.Exception"/>
+        </module>
+        <module name="NoClone"/>
+        <module name="SuperClone"/>
+        <module name="SuperFinalize"/>
+        <module name="EqualsHashCode"/>
+        <module name="MissingDeprecated"/>
+        <module name="FallThrough"/>
+        <module name="IllegalInstantiation">
+            <property name="classes" value="java.lang.Boolean, java.lang.Integer, java.lang.Long, java.lang.Short, java.lang.Character, java.lang.Byte, java.lang.Double, java.lang.Float"/>
+        </module>
+        <module name="ParameterAssignment"/>
+        <module name="StringLiteralEquality"/>
+        <module name="HiddenField">
+            <property name="ignoreConstructorParameter" value="true"/>
+            <property name="ignoreSetter" value="true"/>
+        </module>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="ArrayTypeStyle"/>
+        <module name="InnerAssignment"/>
+        <module name="OuterTypeFilename"/>
+        <module name="FinalParameters"/>
+        <module name="ModifiedControlVariable"/>
+        <module name="OuterTypeNumber"/>
+
+        <module name="MagicNumber">
+            <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100, 1000"/>
+            <property name="ignoreAnnotation" value="true"/>
+            <property name="ignoreHashCodeMethod" value="true"/>
+            <property name="ignoreFieldDeclaration" value="true"/>
+            <property name="ignoreAnnotationElementDefaults" value="true"/>
+        </module>
+
+        <!-- Architectural integrity -->
+        <module name="HideUtilityClassConstructor"/>
+        <module name="IllegalType">
+            <property name="illegalClassNames"
+                      value="java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeMap, java.util.TreeSet, java.util.Vector, java.util.Hashtable"/>
+        </module>
+        <module name="VisibilityModifier">
+            <property name="protectedAllowed" value="true"/>
+        </module>
+        <module name="IllegalThrows">
+            <property name="illegalClassNames"
+                      value="java.lang.RuntimeException, java.lang.Exception"/>
+            <message key="illegal.throw"
+                     value="Don''t throw bare RuntimeException/Exception — use a domain-specific subclass."/>
+        </module>
+        <module name="MutableException"/>
+        <module name="FinalClass"/>
+        <module name="DeclarationOrder">
+            <property name="ignoreConstructors" value="true"/>
+            <property name="ignoreModifiers" value="true"/>
+        </module>
+
+        <!-- Formatting -->
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+            <property name="braceAdjustment" value="0"/>
+            <property name="caseIndent" value="4"/>
+            <property name="throwsIndent" value="4"/>
+            <property name="lineWrappingIndentation" value="8"/>
+            <property name="arrayInitIndent" value="4"/>
+        </module>
+        <module name="MethodParamPad"/>
+        <module name="ParenPad"/>
+        <module name="GenericWhitespace"/>
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+            <property name="allowEmptyTypes" value="true"/>
+            <property name="allowEmptyLoops" value="true"/>
+            <property name="allowEmptyLambdas" value="true"/>
+            <property name="allowEmptyCatches" value="true"/>
+        </module>
+        <module name="OneStatementPerLine"/>
+        <module name="MultipleVariableDeclarations"/>
+        <module name="NoFinalizer"/>
+        <module name="RedundantModifier"/>
+        <module name="AvoidDoubleBraceInitialization"/>
+        <module name="EmptyLineSeparator">
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <property name="allowMultipleEmptyLines" value="false"/>
+        </module>
+        <module name="WhitespaceAfter"/>
+        <module name="NoWhitespaceBefore"/>
+        <module name="ArrayTrailingComma"/>
+        <module name="UnnecessarySemicolonAfterOuterTypeDeclaration"/>
+
+        <!-- Complexity and length -->
+        <module name="NPathComplexity">
+            <property name="max" value="200"/>
+        </module>
+        <module name="BooleanExpressionComplexity">
+            <property name="max" value="3"/>
+        </module>
+        <module name="MethodLength">
+            <property name="max" value="50"/>
+        </module>
+        <module name="CyclomaticComplexity">
+            <property name="max" value="10"/>
+        </module>
+        <module name="ParameterNumber">
+            <property name="max" value="8"/>
+        </module>
+        <module name="JavaNCSS">
+            <property name="methodMaximum" value="40"/>
+            <property name="classMaximum" value="300"/>
+        </module>
+        <module name="NestedIfDepth">
+            <property name="max" value="3"/>
+        </module>
+        <module name="LambdaBodyLength">
+            <property name="max" value="20"/>
+        </module>
+    </module>
+</module>
