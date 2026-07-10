@@ -88,6 +88,7 @@
             <property name="illegalClassNames" value="java.lang.Throwable, java.lang.Exception"/>
         </module>
         <module name="InnerAssignment"/>
+        <module name="MissingNullCaseInSwitch"/>
         <module name="MissingSwitchDefault"/>
         <module name="ModifiedControlVariable"/>
         <module name="StringLiteralEquality"/>
@@ -113,6 +114,8 @@
         <module name="MutableException"/>
         <module name="NoClone"/>
         <module name="OuterTypeFilename"/>
+        <module name="OverloadMethodsDeclarationOrder"/>
+        <module name="PackageDeclaration"/>
         <module name="SuperClone"/>
         <module name="SuperFinalize"/>
         <module name="VisibilityModifier">
@@ -135,12 +138,14 @@
 
         <!-- === DISCIPLINE === -->
         <module name="AvoidDoubleBraceInitialization"/>
+        <module name="AvoidNestedBlocks"/>
         <module name="CatchParameterName"/>
         <module name="ClassTypeParameterName"/>
         <module name="ConstantName">
             <property name="format" value="^log(ger)?$|^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
         </module>
         <module name="EmptyBlock"/>
+        <module name="FinalLocalVariable"/>
         <module name="FinalParameters"/>
         <module name="RegexpSinglelineJava">
             <property name="id" value="forbiddenPrint"/>
@@ -165,6 +170,12 @@
         <module name="IllegalInstantiation">
             <property name="classes" value="java.lang.Boolean, java.lang.Integer, java.lang.Long, java.lang.Short, java.lang.Character, java.lang.Byte, java.lang.Double, java.lang.Float"/>
         </module>
+        <module name="ImportOrder">
+            <property name="groups" value="java,javax,jakarta"/>
+            <property name="separated" value="true"/>
+            <property name="ordered" value="true"/>
+            <property name="option" value="top"/>
+        </module>
         <module name="LambdaParameterName"/>
         <module name="LocalVariableName"/>
         <module name="MagicNumber">
@@ -180,7 +191,9 @@
         </module>
         <module name="MethodTypeParameterName"/>
         <module name="ModifierOrder"/>
+        <module name="MultipleStringLiterals"/>
         <module name="NoFinalizer"/>
+        <module name="OneTopLevelClass"/>
         <module name="OuterTypeNumber"/>
         <module name="PackageName">
             <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
@@ -196,10 +209,17 @@
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
         <module name="StaticVariableName"/>
+        <module name="SuppressWarnings">
+            <property name="format" value="^all$"/>
+        </module>
         <module name="TypeName"/>
+        <module name="UnusedCatchParameterShouldBeUnnamed"/>
         <module name="UnusedImports"/>
+        <module name="UnusedLambdaParameterShouldBeUnnamed"/>
         <module name="UnusedLocalVariable"/>
         <module name="UpperEll"/>
+        <module name="VariableDeclarationUsageDistance"/>
+        <module name="WhenShouldBeUsed"/>
 
         <!-- === FORMATTING === -->
         <module name="ArrayTrailingComma"/>
@@ -226,6 +246,9 @@
         <module name="ParenPad"/>
         <module name="RightCurly"/>
         <module name="UnnecessarySemicolonAfterOuterTypeDeclaration"/>
+        <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
+        <module name="UnnecessarySemicolonInEnumeration"/>
+        <module name="UnnecessarySemicolonInTryWithResources"/>
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround">
             <property name="allowEmptyConstructors" value="true"/>
@@ -240,6 +263,8 @@
         <module name="BooleanExpressionComplexity">
             <property name="max" value="3"/>
         </module>
+        <module name="ClassDataAbstractionCoupling"/>
+        <module name="ClassFanOutComplexity"/>
         <module name="CyclomaticComplexity">
             <property name="max" value="10"/>
         </module>
@@ -253,11 +278,13 @@
         <module name="MethodLength">
             <property name="max" value="50"/>
         </module>
-        <module name="NPathComplexity">
-            <property name="max" value="200"/>
-        </module>
+        <module name="NestedForDepth"/>
         <module name="NestedIfDepth">
             <property name="max" value="3"/>
+        </module>
+        <module name="NestedTryDepth"/>
+        <module name="NPathComplexity">
+            <property name="max" value="200"/>
         </module>
         <module name="ParameterNumber">
             <property name="max" value="8"/>

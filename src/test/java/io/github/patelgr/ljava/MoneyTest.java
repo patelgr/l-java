@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
+// (blank-line group separator omitted: palantirJavaFormat collapses it on every run)
 import org.junit.jupiter.api.Test;
 
 final class MoneyTest {
