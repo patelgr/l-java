@@ -9,6 +9,10 @@ build/
 !.idea/inspectionProfiles/
 *.iml
 .vscode/
+.classpath
+.project
+.factorypath
+.settings/
 *.class
 
 # OS
