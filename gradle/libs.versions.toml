@@ -13,9 +13,6 @@ gradle-errorprone-plugin = "4.4.0"
 gradle-versions-plugin = "0.53.0"
 spotless = "8.4.0"
 
-[plugins]
-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-
 [libraries]
 # Null-safety annotations (JSpecify — the modern JVM-wide standard)
 jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
