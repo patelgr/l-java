@@ -3,7 +3,7 @@ plugins {
 }
 
 checkstyle {
-    toolVersion = "10.18.0"
+    toolVersion = "10.21.4"
     configDirectory.set(rootProject.layout.projectDirectory.dir("config/checkstyle"))
     isIgnoreFailures = false
     maxWarnings = 0
