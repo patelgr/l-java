@@ -1,0 +1,159 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="LJava" />
+    <!--
+      ====================================================================
+      LJava inspection profile — single severity ladder, three tiers.
+      Source classification: docs/inspection-profile-tiers.md (2026-06-14).
+      ====================================================================
+
+        minimum  → level="ERROR"         safe & bug-free; the CI gate.
+        balance  → level="WARNING"       reviewer discipline; IDE default.
+                                         (mostly inherited IntelliJ defaults —
+                                          NOT enumerated here.)
+        paranoid → level="WEAK WARNING"  opinionated/modernization; IDE on-demand.
+
+      How the tiers are read:
+        - CI (Qodana, qodana.yaml) fails on ERROR only  → enforces `minimum`.
+        - IDE highlight default shows ERROR + WARNING    → `balance`.
+        - Devs reveal WEAK WARNING for a deep pass        → `paranoid`.
+
+      DEDUP: Error Prone + Checkstyle already enforce many of these at ERROR
+      in the build. To avoid double-reporting, the overlaps are NOT promoted
+      here and/or are `exclude`d in qodana.yaml. Keep that list in sync as you
+      enable more EP/Checkstyle rules (see docs/quality-backport-plan.md).
+
+      ID DISCIPLINE: every ERROR entry below uses a VERIFIED IntelliJ
+      inspectionId. The expanded `minimum` set from the classification (whose
+      IDs were not yet verified) is listed in the "VERIFY-THEN-PROMOTE" comment
+      at the bottom — confirm each ID in Settings | Editor | Inspections (or the
+      inspection's Inspectopedia page) before turning it into a live entry, so
+      it doesn't silently no-op.
+    -->
+
+    <!-- ═══ minimum (ERROR) — CI gate ═══════════════════════════════════ -->
+
+    <!-- Probable bugs / data flow -->
+    <inspection_tool class="DataFlowIssue" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="MisspelledEquals" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="EqualsWithItself" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ThrowableNotThrown" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ExpressionComparedToItself" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InfiniteRecursion" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NewObjectEquality" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="OptionalGetWithoutIsPresent" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ResultOfMethodCallIgnored" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="MismatchedReadAndWriteOfArray" enabled="true" level="ERROR" enabled_by_default="true" />
+    <!-- NumberEquality / ObjectEquality intentionally NOT promoted: Error Prone
+         ReferenceEquality already gates reference '==' at ERROR (dedup). -->
+
+    <!-- Numeric -->
+    <inspection_tool class="BigDecimalEquals" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ComparisonToNaN" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="FloatingPointEquality" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Control flow -->
+    <inspection_tool class="EnumSwitchStatementWhichMissesCases" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InfiniteLoopStatement" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Error handling -->
+    <inspection_tool class="ContinueOrBreakFromFinallyBlock" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NullThrown" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ReturnInsideFinallyBlock" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ThrowFromFinallyBlock" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ThrowInsideCatchBlockWhichIgnoresCaughtException" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Threading / concurrency -->
+    <inspection_tool class="AwaitNotInLoop" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NotifyCalledOnCondition" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="WaitCalledOnCondition" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="WaitNotInLoop" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="WaitNotifyWhileNotSynced" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="CallToSystemRunFinalizersOnExit" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="CallToThreadStopSuspendOrResumeManager" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="DoubleCheckedLocking" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="AtomicFieldUpdaterIssues" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="LockAcquiredButNotSafelyReleased" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="StaticInitializerReferencesSubClass" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="SynchronizeOnNonFinalField" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="SynchronizedOnLiteralObject" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NonSynchronizedMethodOverridesSynchronizedMethod" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Security -->
+    <inspection_tool class="ClassLoaderInstantiation" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="PublicStaticArrayField" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="PublicStaticCollectionField" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="UnsecureRandomNumberGeneration" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Initialization -->
+    <inspection_tool class="AbstractMethodCallInConstructor" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Code maturity (obsolete / unsafe API banned in new code) -->
+    <inspection_tool class="OptionalAssignedToNull" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="UseOfObsoleteCollectionType" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="UseOfObsoleteDateTimeApi" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Dependency (architectural correctness) -->
+    <inspection_tool class="CyclicClassDependency" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="CyclicPackageDependency" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Portability -->
+    <inspection_tool class="HardcodedFileSeparators" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- ═══ paranoid (WEAK WARNING) — IDE on-demand ════════════════════════ -->
+    <!-- Modernization nudges: available as hints, never balance-level noise,
+         never a CI blocker. -->
+    <inspection_tool class="EnhancedSwitchMigration" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="TextBlockMigration" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="PatternVariablesCanBeUsed" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="RecordMigration" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="SequencedCollectionMethodCanBeUsed" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+
+    <!-- ═══ conditionally OFF ══════════════════════════════════════════════ -->
+    <!-- i18n hardcoded-string nags: off unless the app is localised. -->
+    <inspection_tool class="HardCodedStringLiteral" enabled="false" level="WARNING" enabled_by_default="false" />
+    <!-- Also disable in Settings | Editor | Inspections if not applicable:
+         • the Serialization category — unless the app uses java.io.Serializable
+         • the Cloning category       — unless the codebase uses clone()
+         • TestNG, Lombok             — not used by this template -->
+
+    <!-- ═══ coverage (balance, non-blocking) ═══════════════════════════════ -->
+    <inspection_tool class="JvmCoverageInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="classThreshold" value="80" />
+      <option name="methodThreshold" value="80" />
+      <option name="warnMissingCoverage" value="true" />
+    </inspection_tool>
+
+    <!--
+      ════════════════════════════════════════════════════════════════════
+      VERIFY-THEN-PROMOTE — additional `minimum` inspections identified in
+      docs/inspection-profile-tiers.md whose inspectionId was not yet
+      confirmed. Confirm each ID, then move it into the ERROR block above.
+
+        Error handling:  'Error' not rethrown; 'finally' block which can not
+                         complete normally; Throwable supplier never returns.
+        Numeric:         Division by zero; Numeric overflow; Integer division
+                         in floating-point context; 'BigDecimal' method without
+                         rounding mode; Unpredictable 'BigDecimal' constructor;
+                         Suspicious oddness check; Comparison of 'short' and
+                         'char'; Negative int hex constant in long context.
+        Control flow:    Duplicate condition; 'if'/conditional with identical
+                         branches; Fallthrough in 'switch'; Idempotent loop
+                         body; Loop statement that does not loop; Loop variable
+                         not updated; Pointless 'indexOf()' comparison.
+        Assignment:      Assignment used as condition; Nested assignment;
+                         Result of '++'/'--' used.
+        Initialization:  'this' escaped in construction; Instance/Static field
+                         used before initialization; Unsafe lazy init of static.
+        Memory:          Call to 'System.gc()'/'Runtime.gc()'  (also Checkstyle).
+        Portability:     Hardcoded line separator; Call to 'System.exit()'
+                         (System.exit also banned by Checkstyle — exclude from
+                         the Qodana gate to dedup).
+        Bitwise:         Incompatible bitwise mask operation; Shift by
+                         inappropriate constant.
+        i18n:            'SimpleDateFormat' without locale; toUpper/LowerCase
+                         without locale; Implicit platform default charset.
+      ════════════════════════════════════════════════════════════════════
+    -->
+  </profile>
+</component>

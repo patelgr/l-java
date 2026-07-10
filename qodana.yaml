@@ -1,0 +1,38 @@
+version: "1.0"
+
+# Qodana Community JVM linter (free). Switch to `qodana-jvm` for Ultimate-only inspections.
+linter: qodana-jvm-community
+
+# Use the single severity-laddered profile. minimum=ERROR, balance=WARNING,
+# paranoid=WEAK WARNING (see .idea/inspectionProfiles/LJava.xml + docs/inspection-profile-tiers.md).
+profile:
+  path: .idea/inspectionProfiles/LJava.xml
+
+# CI gate = the `minimum` tier only. minimum inspections are ERROR, which Qodana surfaces as
+# critical/high severity; balance (WARNING→moderate) and paranoid (WEAK WARNING→low) are reported
+# but never block the build. Verify the ERROR→critical/high mapping on the first Qodana run and
+# adjust if your version maps differently.
+failureConditions:
+  severityThresholds:
+    critical: 0
+    high: 0
+  # Optional coverage gate on NEW code (needs coverage data wired into the Qodana run):
+  # testCoverageThresholds:
+  #   fresh: 80
+  #   total: 0   # 0 = don't gate whole-project coverage (ratchet new code only)
+
+# DEDUP: these are already enforced at ERROR by Checkstyle / Error Prone in this build. Excluding
+# them from Qodana stops the same defect being reported by two engines. Extend this list as you
+# enable more EP/Checkstyle ERROR rules (see docs/quality-backport-plan.md).
+exclude:
+  - name: UseOfSystemOutOrSystemErr   # Checkstyle: forbiddenPrint (System.out/err ban)
+  - name: CallToPrintStackTrace       # Checkstyle: forbiddenPrintStackTrace
+  - name: CallToSystemExit            # Checkstyle: forbiddenSystemExit
+  - name: CallToSystemGC              # Checkstyle: forbiddenSystemGc
+  # Candidates to add once you confirm Error Prone owns the equivalent at ERROR:
+  #   - name: NumberEquality          # EP ReferenceEquality (reference '==')
+  #   - name: ObjectEquality          # EP ReferenceEquality
+
+# Adoption on an existing codebase: generate a baseline so only NEW findings fail, letting you turn
+# the gate on without a big-bang cleanup:
+#   qodana scan --baseline qodana.sarif.json

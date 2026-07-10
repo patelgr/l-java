@@ -4,8 +4,9 @@
 build/
 !gradle/wrapper/gradle-wrapper.jar
 
-# IDE
-.idea/
+# IDE — ignore project-local IDE state, but commit shared inspection profiles + Qodana config
+.idea/*
+!.idea/inspectionProfiles/
 *.iml
 .vscode/
 *.class
