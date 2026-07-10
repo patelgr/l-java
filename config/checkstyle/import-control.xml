@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE import-control PUBLIC
+    "-//Checkstyle//DTD ImportControl Configuration 1.4//EN"
+    "https://checkstyle.org/dtds/import_control_1_4.dtd">
+<!--
+    Package-layering rules for the ImportControl Checkstyle module (wired, but commented
+    out, in checkstyle.xml — enable it once this project has real architectural layers
+    to enforce).
+
+    Today this allows every import from every subpackage: a template has no layers yet,
+    so there is nothing to constrain. When your project grows subpackages that should not
+    depend on each other (e.g. a "domain" package that must not import from a "web"
+    package), replace the blanket <allow> below with <subpackage> rules. Example:
+
+    <subpackage name="domain">
+        <allow pkg="io.github.patelgr.ljava.domain"/>
+    </subpackage>
+
+    <subpackage name="web">
+        <allow pkg="io.github.patelgr.ljava.web"/>
+        <allow pkg="io.github.patelgr.ljava.domain"/>
+    </subpackage>
+
+    The above would let "web" depend on "domain", but not the reverse — uncomment and
+    adjust the package names to match your actual layering.
+-->
+<import-control pkg="io.github.patelgr.ljava">
+    <allow pkg=".*" regex="true"/>
+</import-control>

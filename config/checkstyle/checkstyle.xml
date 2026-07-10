@@ -110,6 +110,15 @@
             <property name="illegalClassNames"
                       value="java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeMap, java.util.TreeSet, java.util.Vector, java.util.Hashtable"/>
         </module>
+        <!--
+            ImportControl: enforce package-layering rules once this project has real
+            architectural layers (e.g. domain/ vs web/). Edit
+            config/checkstyle/import-control.xml first, then uncomment.
+
+        <module name="ImportControl">
+            <property name="file" value="${config_loc}/import-control.xml"/>
+        </module>
+        -->
         <module name="MissingDeprecated"/>
         <module name="MutableException"/>
         <module name="NoClone"/>
