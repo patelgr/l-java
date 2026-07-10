@@ -14,6 +14,7 @@ dependencies {
     "errorprone"(libs.findLibrary("errorprone-core").get())
     "errorprone"(libs.findLibrary("nullaway").get())
     "errorprone"(libs.findLibrary("nopen-checker").get())
+    "errorprone"(libs.findLibrary("errorprone-slf4j").get())
     "compileOnly"(libs.findLibrary("errorprone-annotations").get())
     "compileOnly"(libs.findLibrary("nopen-annotations").get())
     "compileOnly"(libs.findLibrary("spotbugs-annotations").get())
@@ -92,5 +93,12 @@ tasks.withType<JavaCompile>().configureEach {
         check("ReturnMissingNullable", net.ltgt.gradle.errorprone.CheckSeverity.ERROR)
         check("UnnecessaryBoxedVariable", net.ltgt.gradle.errorprone.CheckSeverity.ERROR)
         check("UnnecessaryOptionalGet", net.ltgt.gradle.errorprone.CheckSeverity.ERROR)
+
+        // SLF4J
+        check("Slf4jLoggerShouldBePrivate", net.ltgt.gradle.errorprone.CheckSeverity.ERROR)
+        check("Slf4jLoggerShouldBeFinal", net.ltgt.gradle.errorprone.CheckSeverity.ERROR)
+        check("Slf4jSignOnlyFormat", net.ltgt.gradle.errorprone.CheckSeverity.ERROR)
+        check("Slf4jFormatShouldBeConst", net.ltgt.gradle.errorprone.CheckSeverity.WARN)
+        check("Slf4jDoNotLogMessageOfExceptionExplicitly", net.ltgt.gradle.errorprone.CheckSeverity.WARN)
     }
 }
