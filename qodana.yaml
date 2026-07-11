@@ -29,6 +29,11 @@ exclude:
   - name: CallToPrintStackTrace       # Checkstyle: forbiddenPrintStackTrace
   - name: CallToSystemExit            # Checkstyle: forbiddenSystemExit
   - name: CallToSystemGC              # Checkstyle: forbiddenSystemGc
+  - name: AssignmentUsedAsCondition   # Checkstyle: InnerAssignment
+  - name: ImplicitDefaultCharsetUsage # Error Prone: DefaultCharset
+  - name: NestedAssignment            # Checkstyle: InnerAssignment
+  - name: StringToUpperCaseOrToLowerCaseWithoutLocale  # Error Prone: StringCaseLocaleUsage
+  - name: SynchronizeOnNonFinalField  # Error Prone: SynchronizeOnNonFinalField
   # Candidates to add once you confirm Error Prone owns the equivalent at ERROR:
   #   - name: NumberEquality          # EP ReferenceEquality (reference '==')
   #   - name: ObjectEquality          # EP ReferenceEquality

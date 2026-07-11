@@ -23,9 +23,10 @@ rules and nothing else.
 ## Generated artifacts (2026-06-14)
 
 - `.idea/inspectionProfiles/LJava.xml` — the severity-laddered profile. `minimum`=ERROR uses
-  **verified inspection IDs only** (~48); the expanded `minimum` set whose IDs aren't yet confirmed
-  sits in the profile's `VERIFY-THEN-PROMOTE` comment (guessed IDs silently no-op, so they are not
-  shipped live). `paranoid`=WEAK WARNING; `balance` inherits IDE defaults.
+  **verified inspection IDs only**; the original VERIFY-THEN-PROMOTE backlog (~30 candidates) was
+  resolved and promoted 2026-07-11 (see the profile's own header note on the four legacy IDs whose
+  final confirmation is deferred to the first real Qodana CI run). `paranoid`=WEAK WARNING;
+  `balance` inherits IDE defaults.
 - `.idea/inspectionProfiles/profiles_settings.xml` — sets `LJava` as the project profile.
 - `qodana.yaml` — CI gate fails on ERROR (`severityThresholds: critical/high = 0`); `exclude`s the
   Checkstyle/EP overlaps; includes baseline + coverage notes.
@@ -36,7 +37,8 @@ Judgment-call defaults applied: Overly-broad-`catch` → **balance** (Checkstyle
 the hard ban at minimum); possibly-lossy compound assignment → **balance** (promote to minimum for
 financial/numeric domains); `"Cast"` on the Numeric page → **dropped** (mis-grouped).
 
-Status: scaffold — verify the ERROR IDs and the ERROR→severity mapping on the first Qodana run.
+Status: ERROR IDs verified and promoted 2026-07-11 (four legacy IDs pending final CI confirmation,
+see the profile's own note). Still verify the ERROR→severity mapping on the first Qodana run.
 
 ## Category → tier rubric
 

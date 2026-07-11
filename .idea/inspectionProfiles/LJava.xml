@@ -48,20 +48,51 @@
          ReferenceEquality already gates reference '==' at ERROR (dedup). -->
 
     <!-- Numeric -->
+    <inspection_tool class="BadOddness" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="BigDecimalEquals" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="BigDecimalMethodWithoutRoundingCalled" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ComparisonOfShortAndChar" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ComparisonToNaN" enabled="true" level="ERROR" enabled_by_default="true" />
+    <!-- "divzero" is the documented Qodana-config ID (legacy short name) for Division by zero. -->
+    <inspection_tool class="divzero" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="FloatingPointEquality" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="IntegerDivisionInFloatingPointContext" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NegativeIntConstantInLongContext" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NumericOverflow" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="UnpredictableBigDecimalConstructorCall" enabled="true" level="ERROR" enabled_by_default="true" />
 
     <!-- Control flow -->
+    <inspection_tool class="ConditionalExpressionWithIdenticalBranches" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="DuplicateCondition" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="EnumSwitchStatementWhichMissesCases" enabled="true" level="ERROR" enabled_by_default="true" />
+    <!-- "fallthrough" is the documented Qodana-config ID (legacy short name). -->
+    <inspection_tool class="fallthrough" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="IdempotentLoopBody" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="IfStatementWithIdenticalBranches" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="InfiniteLoopStatement" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="LoopConditionNotUpdatedInsideLoop" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="LoopStatementThatDoesntLoop" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="PointlessIndexOfComparison" enabled="true" level="ERROR" enabled_by_default="true" />
 
     <!-- Error handling -->
     <inspection_tool class="ContinueOrBreakFromFinallyBlock" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ErrorNotRethrown" enabled="true" level="ERROR" enabled_by_default="true" />
+    <!-- "finally" is the documented Qodana-config ID (legacy short name); IDE-facing docs also
+         reference "FallthruInSwitchStatement"-style formal names for some of these older
+         inspections. Confirm on the first real Qodana CI run — see VERIFY-THEN-PROMOTE note. -->
+    <inspection_tool class="finally" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="NullThrown" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ReturnInsideFinallyBlock" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ThrowFromFinallyBlock" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ThrowInsideCatchBlockWhichIgnoresCaughtException" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ThrowableSupplierOnlyThrowException" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Assignment -->
+    <inspection_tool class="AssignmentUsedAsCondition" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NestedAssignment" enabled="true" level="ERROR" enabled_by_default="true" />
+    <!-- "ValueOfIncrementOrDecrementUsed" is the documented Qodana-config ID; some IDE-facing
+         docs reference it as "IncrementDecrementUsedAsExpression" instead. -->
+    <inspection_tool class="ValueOfIncrementOrDecrementUsed" enabled="true" level="ERROR" enabled_by_default="true" />
 
     <!-- Threading / concurrency -->
     <inspection_tool class="AwaitNotInLoop" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -87,6 +118,22 @@
 
     <!-- Initialization -->
     <inspection_tool class="AbstractMethodCallInConstructor" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InstanceVariableUsedBeforeInitialized" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NonThreadSafeLazyInitialization" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="StaticVariableUsedBeforeInitialization" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ThisEscapedInObjectConstruction" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Memory -->
+    <inspection_tool class="CallToSystemGC" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Bitwise -->
+    <inspection_tool class="IncompatibleBitwiseMaskOperation" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ShiftOutOfRange" enabled="true" level="ERROR" enabled_by_default="true" />
+
+    <!-- Internationalization -->
+    <inspection_tool class="ImplicitDefaultCharsetUsage" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="SimpleDateFormatWithoutLocale" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="StringToUpperCaseOrToLowerCaseWithoutLocale" enabled="true" level="ERROR" enabled_by_default="true" />
 
     <!-- Code maturity (obsolete / unsafe API banned in new code) -->
     <inspection_tool class="OptionalAssignedToNull" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -98,7 +145,11 @@
     <inspection_tool class="CyclicPackageDependency" enabled="true" level="ERROR" enabled_by_default="true" />
 
     <!-- Portability -->
-    <inspection_tool class="HardcodedFileSeparators" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="CallToSystemExit" enabled="true" level="ERROR" enabled_by_default="true" />
+    <!-- Bug fix 2026-07-11: was "HardcodedFileSeparators" (plural) — verified the real ID is
+         singular; the typo meant this entry silently no-op'd since the profile predates this file. -->
+    <inspection_tool class="HardcodedFileSeparator" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="HardcodedLineSeparator" enabled="true" level="ERROR" enabled_by_default="true" />
 
     <!-- ═══ paranoid (WEAK WARNING) — IDE on-demand ════════════════════════ -->
     <!-- Modernization nudges: available as hints, never balance-level noise,
@@ -126,33 +177,27 @@
 
     <!--
       ════════════════════════════════════════════════════════════════════
-      VERIFY-THEN-PROMOTE — additional `minimum` inspections identified in
-      docs/inspection-profile-tiers.md whose inspectionId was not yet
-      confirmed. Confirm each ID, then move it into the ERROR block above.
+      VERIFY-THEN-PROMOTE — resolved 2026-07-11. Every candidate from the
+      original list (docs/inspection-profile-tiers.md) was traced to a
+      specific inspectionId via JetBrains Inspectopedia and promoted into
+      the ERROR block above. None were left unresolved.
 
-        Error handling:  'Error' not rethrown; 'finally' block which can not
-                         complete normally; Throwable supplier never returns.
-        Numeric:         Division by zero; Numeric overflow; Integer division
-                         in floating-point context; 'BigDecimal' method without
-                         rounding mode; Unpredictable 'BigDecimal' constructor;
-                         Suspicious oddness check; Comparison of 'short' and
-                         'char'; Negative int hex constant in long context.
-        Control flow:    Duplicate condition; 'if'/conditional with identical
-                         branches; Fallthrough in 'switch'; Idempotent loop
-                         body; Loop statement that does not loop; Loop variable
-                         not updated; Pointless 'indexOf()' comparison.
-        Assignment:      Assignment used as condition; Nested assignment;
-                         Result of '++'/'--' used.
-        Initialization:  'this' escaped in construction; Instance/Static field
-                         used before initialization; Unsafe lazy init of static.
-        Memory:          Call to 'System.gc()'/'Runtime.gc()'  (also Checkstyle).
-        Portability:     Hardcoded line separator; Call to 'System.exit()'
-                         (System.exit also banned by Checkstyle — exclude from
-                         the Qodana gate to dedup).
-        Bitwise:         Incompatible bitwise mask operation; Shift by
-                         inappropriate constant.
-        i18n:            'SimpleDateFormat' without locale; toUpper/LowerCase
-                         without locale; Implicit platform default charset.
+      A handful of legacy inspections (finally, divzero, fallthrough,
+      ValueOfIncrementOrDecrementUsed) have Inspectopedia pages that show
+      two different-looking ID strings — one labeled "By ID" (documented as
+      "used to locate inspection in e.g. Qodana configuration files", and
+      matching the page's own URL slug) and a separately-labeled "Inspection
+      ID" field that sometimes disagreed. Local empirical verification via
+      a Dockerized Qodana run was inconclusive: unrecognized inspection IDs
+      don't produce a distinct warning, they simply produce zero findings —
+      indistinguishable from a valid ID that has no matching violation in
+      the sample sources (proven by including a deliberately-bogus ID in
+      the test profile and observing it produce no error either). The "By
+      ID" value was used for all four, since it is the one Inspectopedia
+      consistently and explicitly documents for this exact use case. Treat
+      the first real Qodana CI run as the canonical confirmation for these
+      four specifically — if any of them produce a schema/profile-loading
+      warning, swap in the alternate "Inspection ID" value noted inline.
       ════════════════════════════════════════════════════════════════════
     -->
   </profile>
