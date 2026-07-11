@@ -21,10 +21,29 @@ failureConditions:
   #   fresh: 80
   #   total: 0   # 0 = don't gate whole-project coverage (ratchet new code only)
 
+# SCOPE: buildSrc's precompiled script plugins make Gradle regenerate Kotlin DSL accessor files
+# under build/generated-sources on every resolution (including Qodana's own project-model step).
+# Those files are machine-generated glue code, not hand-written source — analysing them floods the
+# gate with noise (thousands of "unused import" etc.) that has nothing to do with this template's
+# actual code. Exclude all generated/build output from analysis entirely.
+#
 # DEDUP: these are already enforced at ERROR by Checkstyle / Error Prone in this build. Excluding
 # them from Qodana stops the same defect being reported by two engines. Extend this list as you
 # enable more EP/Checkstyle ERROR rules (see docs/quality-backport-plan.md).
 exclude:
+  - name: All
+    paths:
+      - build
+      - buildSrc/build
+  # XmlHighlighting: our checkstyle/import-control/suppressions XML files declare DTDs hosted at
+  # checkstyle.org, which Qodana's offline IDE engine has no local schema mapping for — a false
+  # "unregistered URI" error, not a real defect in those files.
+  - name: XmlHighlighting
+    paths:
+      - config/checkstyle
+  # LatestMinorVersion: advisory version-bump nag, not a bug. Wrapper upgrades are handled the
+  # same way dependency upgrades are — advisory-only (see the CI `dependencyUpdates` step).
+  - name: LatestMinorVersion
   - name: UseOfSystemOutOrSystemErr   # Checkstyle: forbiddenPrint (System.out/err ban)
   - name: CallToPrintStackTrace       # Checkstyle: forbiddenPrintStackTrace
   - name: CallToSystemExit            # Checkstyle: forbiddenSystemExit
