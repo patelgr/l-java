@@ -12,7 +12,7 @@ repositories {
 dependencies {
     implementation("net.ltgt.gradle:gradle-errorprone-plugin:4.4.0")
     implementation("com.github.ben-manes:gradle-versions-plugin:0.53.0")
-    implementation("com.diffplug.spotless:spotless-plugin-gradle:8.4.0")
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:8.8.0")
     implementation("com.github.spotbugs.snom:spotbugs-gradle-plugin:6.4.8")
 }
 
